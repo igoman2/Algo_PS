@@ -1,0 +1,40 @@
+function solution(bridge_length, weight, truck_weights) {
+    var answer = 0;
+    let time = 0;
+    let onBridge = [];
+    let weightList = [];
+    let arrive = []
+    const END  = truck_weights.length
+    let flag = true
+    
+    while(flag){
+        //시간 증가, 다리 안에 있는 트럭들 경과 시간 증가
+        time++;
+        onBridge.forEach((item) => item.time++)
+        // 다리 다 지나면 빼줌
+        onBridge.forEach((item) => {
+            if(item.time >= bridge_length){
+                onBridge.shift()
+                arrive.push(weightList.shift())
+                
+            }
+        })
+
+        // 만약 onBridge안에 트럭들 합이 weight 보다 작으면 onBridge에 넣음
+        let firstWeight = weightList.length == 0 ? 0 : truck_weights[0]
+        let sum = weightList.reduce((a,c) => {
+            return a+c
+        },0)
+        if(sum + firstWeight <= weight){
+            onBridge.push({time: 0, weight: truck_weights.shift()})
+            weightList = onBridge.map((v) => {
+            return v.weight
+        })
+        }
+        if(truck_weights.length <= 0 && arrive.length == END){
+            flag = false
+        }
+    }
+    answer = time
+    return answer;
+}
