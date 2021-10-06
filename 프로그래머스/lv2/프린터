@@ -1,3 +1,5 @@
+// 큐
+
 function solution(priorities, location) {
     var arr = priorities.map((pr,i) => {
         return {
