@@ -1,0 +1,19 @@
+function solution(priorities, location) {
+    var arr = priorities.map((pr,i) => {
+        return {
+            index: i, pr: pr
+        }
+    })
+    var queue = [];
+    while(arr.length > 0){
+        var firstEle = arr.shift();
+        var hasHighPriority = arr.some( (ele) => ele.pr > firstEle.pr)
+        if(hasHighPriority){
+            arr.push(firstEle)
+        }
+        else{
+            queue.push(firstEle)
+        }
+    }
+return queue.findIndex( (e) => e.index == location) + 1
+}
