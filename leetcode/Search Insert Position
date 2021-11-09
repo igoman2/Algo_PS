@@ -1,0 +1,35 @@
+// normal
+var searchInsert = function(nums, target) {
+    
+    let idx = 0;
+    for(let i=0; i<nums.length; i++){
+        if(nums[i] === target)
+            return i
+        else if(nums[i] < target){
+            idx = i
+        }
+    }
+    if(nums[0] > target){
+        return 0
+    }
+    else{
+        return idx+1
+    }
+};
+
+// binary search 
+var searchInsert = function(nums, target) {
+    let l = 0;
+    let r = nums.length - 1;
+    let m;
+    while(l <= r){
+        m = Math.floor((l + r) / 2);
+        if(target > nums[m]){
+            l = m + 1
+        }
+        else{
+            r = m - 1
+        }
+    }
+    return l
+};
