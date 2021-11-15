@@ -19,6 +19,7 @@ var merge = function(nums1, m, nums2, n) {
 };
 
 // 다른 풀이
+// nums1의 맨 뒤부터 nums1과 nums2의 값을 비교하면서 채움
 var merge = function(nums1, m, nums2, n) {
     while (n>0 ){
     if(nums1[m-1]> nums2[n-1]){
