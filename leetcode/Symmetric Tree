@@ -1,0 +1,69 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+ 
+ // 내 풀이
+var isSymmetric = function(root) {
+    let leftTree = root.left
+    let rightTree = root.right
+    
+    leftTraversal = []
+    rightTraversal = []
+    leftInOrderTraversal(leftTree)
+    rightInOrderTraversal(rightTree)
+    
+    function rightInOrderTraversal(node){
+        if(!node){
+            rightTraversal.push('')
+            return;  
+        } 
+        rightTraversal.push(node.val)
+        rightInOrderTraversal(node.right)
+        rightInOrderTraversal(node.left)
+    }
+    function leftInOrderTraversal(node){
+        if(!node) {
+            leftTraversal.push('')
+            return;
+        }
+        leftTraversal.push(node.val)
+        leftInOrderTraversal(node.left)
+        leftInOrderTraversal(node.right)
+    }
+    for(let i=0; i<leftTraversal.length; i++){
+        if(leftTraversal[i] != rightTraversal[i])
+            return false
+    }
+    return true
+};
+
+ // 다른 풀이
+var isSymmetric = function(root) {
+    let leftTree = root.left
+    let rightTree = root.right
+
+    function solve(p,q){
+        if(p == null && q == null){
+            return true
+        }
+        if(p == null || q == null){
+            return false
+        }
+        if(p.val != q.val){
+            return false
+        }
+        
+        return solve(p.left, q.right) && solve(p.right, q.left)
+    }
+    
+    return solve(root.left, root.right)
+};
