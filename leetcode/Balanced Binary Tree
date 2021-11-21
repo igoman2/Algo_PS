@@ -14,15 +14,15 @@
 // DFS 활용
 var isBalanced = function(root) {
     let isBalanced = true
-    
     function dfs(t){
         if(!t)
             return 0
-        const left = dfs(t.left) + 1
-        const right = dfs(t.right) + 1
+        const left = dfs(t.left)
+        const right = dfs(t.right)
         if(Math.abs(left - right) > 1)
             isBalanced = false
         return 1 + Math.max(left, right)
     }
+    dfs(root)
     return isBalanced
 };
