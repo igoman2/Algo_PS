@@ -1,0 +1,20 @@
+/**
+ * @param {number} numRows
+ * @return {number[][]}
+ */
+var generate = function(numRows) {
+    let result = []
+    for(let i=0; i<numRows; i++){
+        let innerArr = []
+        for(let j=1; j<i+2; j++){
+            if(j == 1 || j == i+1){
+                innerArr.push(1)
+            }
+            else{
+                innerArr.push(result[i-1][j-2] + result[i-1][j-1])
+            }
+        }
+        result.push(innerArr)
+    }
+    return result
+};
