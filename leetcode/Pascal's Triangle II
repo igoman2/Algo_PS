@@ -1,0 +1,20 @@
+/**
+ * @param {number} rowIndex
+ * @return {number[]}
+ */
+var getRow = function(rowIndex) {
+    let totalArr = []
+    for(let i=0; i<=rowIndex; i++){
+        let innerArr = []
+        for(let j=0; j<i+1; j++){
+            if(j == 0 || j == i){
+                innerArr.push(1)
+            }
+            else{
+                innerArr.push(totalArr[i-1][j-1] + totalArr[i-1][j])
+            }
+        }
+        totalArr.push(innerArr)
+    }    
+    return totalArr[rowIndex]
+};
