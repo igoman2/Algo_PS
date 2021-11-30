@@ -1,4 +1,4 @@
-
+// 내 풀이
 var MinStack = function() {
     this.stack = []
 };
@@ -48,3 +48,29 @@ MinStack.prototype.getMin = function() {
  * var param_3 = obj.top()
  * var param_4 = obj.getMin()
  */
+
+
+// Class 활용 풀이
+// top 구현 방식 볼 것
+class MinStack {
+  constructor() {
+    this._top = -1;
+    this.data = [];
+    this.min = Number.MAX_SAFE_INTEGER;
+  }
+  push(n) {
+    this.data[++this._top] = this.min;
+    this.data[++this._top] = n;
+    n < this.min && (this.min = n);
+  }
+  pop() {
+    this.min = this.data[--this._top];
+    --this._top;
+  }
+  top() {
+    return this.data[this._top];
+  }
+  getMin() {
+    return this.min;
+  }
+}
