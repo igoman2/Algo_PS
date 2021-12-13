@@ -1,0 +1,51 @@
+function TreeNode(val, left, right) {
+  this.val = val === undefined ? 0 : val;
+  this.left = left === undefined ? null : left;
+  this.right = right === undefined ? null : right;
+}
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+
+// recursion
+// inorder
+function dfs(root){
+  if(!root){
+    return []
+  }
+  return [...dfs(root.left), root.val, ...dfs(root.right)]
+}
+
+// recursion2
+// inorder
+function inOrderTraversal(root) {
+  let answer = [];
+  traversal(root)
+  function traversal(p) {
+    if (!p) {
+      return null;
+    }
+    traversal(p.left)
+    answer.push(p.val)
+    traversal(p.right)
+  }
+  return answer
+};
+
+// stack
+function dfs(root) {
+  let stack = [];
+  let ret = [];
+  let node = root;
+  while (node || stack.length) {
+    while (node != null) {
+      stack.push(node);
+      node = node.left;
+    }
+    node = stack.pop();
+    ret.push(node.val);
+    node = node.right;
+  }
+  return ret;
+}
