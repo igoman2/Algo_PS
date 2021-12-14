@@ -1,0 +1,25 @@
+class Stack {
+  constructor() {
+    this.store = [];
+    this.index = 0;
+  }
+
+  push(val) {
+    this.store[this.index++] = val;
+  }
+  pop() {
+    if (this.size() <= 0) {
+      return Error("스택이 비어있습니다.");
+    }
+    return this.store[--this.index];
+  }
+  peek() {
+    if (this.size() <= 0) {
+      return Error("스택이 비어있습니다.");
+    }
+    return this.store[this.index];
+  }
+  size() {
+    return this.index;
+  }
+}
