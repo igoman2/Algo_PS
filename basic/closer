@@ -1,0 +1,16 @@
+function makeCounter(predicate) {
+  let counter = 0;
+  return function() {
+    counter = predicate(counter);
+    return counter;
+  };
+}
+
+function increase(num) {
+  return ++num;
+}
+function decrease(num) {
+  return --num;
+}
+
+const increaser = makeCounter(increase);
