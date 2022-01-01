@@ -1,0 +1,15 @@
+/**
+ * @param {number} columnNumber
+ * @return {string}
+ */
+var convertToTitle = function(columnNumber) {
+    let alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var m;
+    let result = [];
+    while(columnNumber > 0){
+        m = (columnNumber - 1) % 26
+        columnNumber = (columnNumber - 1 - m) / 26
+        result.unshift(alphabets[m]);
+    }
+    return result.join('')
+};
