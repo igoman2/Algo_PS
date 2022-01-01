@@ -1,0 +1,35 @@
+// brute force
+/**
+ * @param {number[]} numbers
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(numbers, target) {
+    for(let i=0; i<numbers.length; i++){
+        for(let j=i+1; j<numbers.length; j++){
+            if(numbers[i] + numbers[j] == target){
+                return [i+1, j+1]
+            }
+        }
+    }
+};
+
+// two pointers
+var twoSum = function(numbers, target) {
+   let len=numbers.length
+   let  left=0;
+   let  right=len-1;
+    while(left<=right){
+      let   ans=numbers[left]+numbers[right];
+        if(ans==target){
+            return [left+1,right+1]
+        }
+        else if(ans<target){
+            left++
+        }
+        else if(ans>target){
+            right--
+        }
+    }
+};
+
