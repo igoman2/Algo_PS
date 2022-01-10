@@ -1,0 +1,8 @@
+var reverseBits = function(n) {
+    let binary = n.toString(2);
+    const appendingZeros = 32 - binary.length;
+    for (let index = 0; index < appendingZeros; index++) {
+        binary = "0" + binary;
+    }
+    return parseInt(binary.split("").reverse("").join(""), 2);
+};
