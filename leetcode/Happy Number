@@ -1,0 +1,16 @@
+// https://leetcode.com/problems/happy-number/
+let sum = function(num) {
+    return num.toString().split("").reduce((acc, cur) => parseInt(acc) + Math.pow(cur, 2) , 0)
+}
+
+var isHappy = function(n) {
+    let store = new Set()
+    while(n !== 1){
+        n = sum(n)
+        if(store.has(n)){
+            return false
+        }
+        store.add(n)
+    }
+    return true
+}
