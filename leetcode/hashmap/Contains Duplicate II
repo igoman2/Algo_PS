@@ -1,0 +1,40 @@
+// https://leetcode.com/problems/contains-duplicate-ii
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {boolean}
+ */
+ 
+// 이중 for문
+var containsNearbyDuplicate = function(nums, k) {
+    let a,b
+    for(let i=0; i<nums.length; i++){
+        a = nums[i]
+        for(let j=i+1; j<nums.length; j++){
+            b = nums[j]
+            if(a === b){
+                if(Math.abs(i-j) <= k)
+                    return true
+            }
+        }
+    }
+    return false
+};
+
+//해시맵
+var containsNearbyDuplicate = function(nums, k) {
+    const map = new Map();
+    
+    for (let i = 0; i < nums.length; i++) {
+        const num = nums[i];
+
+        if (map.has(num)) {
+            const j = map.get(num);
+            if (i - j <= k) return true;
+        } 
+        
+        map.set(num, i);
+    }
+    
+    return false;
+};
