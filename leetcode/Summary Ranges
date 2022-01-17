@@ -1,0 +1,26 @@
+// https://leetcode.com/problems/summary-ranges
+/**
+ * @param {number[]} nums
+ * @return {string[]}
+ */
+var summaryRanges = function(nums) {
+    let result = []
+    for(let i=0; i<nums.length; i++){
+        let tmp = []
+        tmp.push(nums[i])
+        for(let j=i; j<nums.length; j++){
+            if(nums[j+1] === nums[j]+1){
+                tmp.push(nums[j+1])
+            }
+            else{
+                i = j
+                if(tmp.length > 1)
+                    result.push(`${tmp[0]}->${tmp[tmp.length-1]}`)
+                else
+                    result.push(`${tmp[0]}`)
+                break;            
+            }
+        }
+    }
+    return result
+};
