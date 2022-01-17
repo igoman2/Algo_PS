@@ -1,0 +1,24 @@
+// https://leetcode.com/problems/power-of-two
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isPowerOfTwo = function (n) {
+  for(let i=0; i<=30; i++){
+      if(n === 2 ** i)
+          return true
+  }
+    return false
+};
+
+// 비트연산 활용
+var isPowerOfTwo = function(n) {
+    if(n === 0)
+        return false
+    if(n < 0)
+        return false
+    if((n & (n-1)) === 0)
+        return true
+    else 
+        return false
+}
