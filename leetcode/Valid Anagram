@@ -29,3 +29,9 @@ var isAnagram = function(s, t) {
     })
     return result;
 };
+
+var isAnagram = function(s, t) {
+    s = [...s];
+    t = [...t];
+    return JSON.stringify(s.sort()) == JSON.stringify(t.sort())
+};
