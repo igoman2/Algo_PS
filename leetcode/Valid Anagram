@@ -1,0 +1,31 @@
+// https://leetcode.com/problems/valid-anagram
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function(s, t) {
+    if(s.length !== t.length)
+        return false
+    s = s.split('')
+    t = t.split('')
+    let result = true
+    let map = new Map()
+    s.forEach((item) => {
+        if(map.has(item)){
+            map.set(item, map.get(item) + 1)
+        }
+        else{
+            map.set(item, 1)
+        }
+    })
+    t.forEach((item) => {
+        if(map.has(item) && map.get(item) > 0){
+            map.set(item, map.get(item) - 1)
+        }
+        else{
+            result = false
+        }
+    })
+    return result;
+};
