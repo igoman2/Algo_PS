@@ -1,0 +1,13 @@
+// https://leetcode.com/problems/third-maximum-number
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var thirdMax = function(nums) {
+    let set = [...new Set(nums)].sort((a,b) => {
+        return b-a
+    })
+    return set.length > 2 ? set[2] : set[0]
+};
+
