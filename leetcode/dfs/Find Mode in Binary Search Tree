@@ -1,0 +1,24 @@
+// https://leetcode.com/problems/find-mode-in-binary-search-tree
+var findMode = function(root){
+    const map = new Map()
+    const maxMap = new Map()
+    let maxValue = -Infinity
+    
+    function dfs(p){
+        if(!p)
+            return;
+        map.set(p.val, (map.get(p.val) || 0) + 1 )
+        if(map.get(p.val) >= maxValue){
+            maxValue = map.get(p.val)
+            if(!maxMap.get(maxValue)){
+                maxMap.set(maxValue, new Set())
+            }
+            maxMap.get(maxValue).add(p.val)
+        }
+        dfs(p.left)
+        dfs(p.right)
+    }
+    
+    dfs(root)
+    return [...maxMap.get(maxValue)]
+}
