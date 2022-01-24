@@ -1,0 +1,30 @@
+// https://leetcode.com/problems/power-of-four
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+
+// 내 풀이
+var isPowerOfFour = function(n) {
+    for(let i=0; i<Infinity; i++){
+        if(4 ** i === n)
+            return true
+        if(4 ** i > n)
+            return false
+    }
+};
+
+// 다른 풀이
+var isPowerOfFour = function(n) {   
+    while(n >= 1){
+        if(n == 1) 
+            break ;
+        n = n/4;
+    }
+  
+    if(n == 1) 
+        return true
+    else 
+        return false
+};
+  
