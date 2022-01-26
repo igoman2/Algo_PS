@@ -1,0 +1,60 @@
+// https://leetcode.com/problems/word-pattern
+/**
+ * @param {string} pattern
+ * @param {string} s
+ * @return {boolean}
+ */
+ 
+// 내 풀이 Map
+var wordPattern = function(pattern, s) {
+    const map1 = new Map()
+    const map2 = new Map()
+    s = s.split(' ')
+    if(pattern.length !== s.length)
+        return false
+    
+    for(let i=0; i<pattern.length; i++){
+        if(map1.has(pattern[i]) && map2.has(s[i])){
+            if(map1.get(pattern[i]) === s[i] && map2.get(s[i]) === pattern[i]){
+                 continue
+            }
+                
+            else{
+                return false
+            }
+                
+        }
+        else if(!map1.has(pattern[i]) && !map2.has(s[i]) ){
+            map1.set(pattern[i], s[i])
+            map2.set(s[i], pattern[i])
+        }
+        else{
+            console.log(i)
+            return false
+            
+        }
+    }
+    return true
+};
+
+// 다른 풀이 Set
+var wordPattern = function(pattern, s) {
+    let obj={}
+    let arr=s.split(" ")
+    let set1=new Set(pattern)
+    let set2=new Set(arr)
+    if(set1.size!==set2.size || pattern.length!==arr.length){
+        return false
+    }
+  for(i=0;i<pattern.length;i++){
+      if(obj[pattern[i]]){
+          if(obj[pattern[i]]!==arr[i]){
+              return false
+          }
+      }
+      else{
+          obj[pattern[i]]=arr[i]
+      }
+  }
+    return true
+};
