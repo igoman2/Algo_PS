@@ -1,0 +1,31 @@
+// https://leetcode.com/problems/intersection-of-two-arrays-ii
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersect = function(nums1, nums2) {
+    let small = []
+    let big = []
+    if(nums1.length < nums2.length){
+        small = nums1
+        big = nums2
+    }
+    else{
+        small = nums2
+        big = nums1
+    }
+    let i=0;
+    let j=0;
+    const result = []
+    while(i<small.length){
+        const idx = big.indexOf(small[i])
+        if(idx !== -1){
+            result.push(small[i])
+            big.splice(idx,1)
+        }
+        i++
+    }
+    return result
+
+};
