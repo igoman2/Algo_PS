@@ -1,0 +1,14 @@
+// https://leetcode.com/problems/arranging-coins
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var arrangeCoins = function(n) {
+    let row = 0
+    let sum = 0;
+    while(sum <= n){
+        row++
+        sum += row
+    }
+    return sum === n ? row : row - 1
+};
