@@ -1,0 +1,25 @@
+// https://leetcode.com/problems/keyboard-row
+/**
+ * @param {string[]} words
+ * @return {string[]}
+ */
+var findWords = function(words) {
+    let row1 = new Set(['q','w','e','r','t','y','u','i','o','p','Q','W','E','R','T','Y','U','I','O','P'])
+    let row2 = new Set(['a','s','d','f','g','h','j','k','l','A','S','D','F','G','H','J','K','L'])
+    let row3 = new Set(['z','x','c','v','b','n','m','Z','X','C','V','B','N','M'])
+    const result = []
+    for(let i=0; i<words.length; i++){
+        let flag = true
+        let currentRow
+        if(row1.has(words[i][0])) currentRow = row1
+        if(row2.has(words[i][0])) currentRow = row2
+        if(row3.has(words[i][0])) currentRow = row3
+        for(let j=0; j<words[i].length; j++){
+            if(!currentRow.has(words[i][j]))
+                flag = false
+        }
+        if(flag)
+            result.push(words[i])
+    }
+    return result
+};
