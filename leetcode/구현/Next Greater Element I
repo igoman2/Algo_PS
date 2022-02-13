@@ -1,0 +1,16 @@
+// https://leetcode.com/problems/next-greater-element-i/submissions
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var nextGreaterElement = function(nums1, nums2) {
+    const result = []
+    for(let i=0; i<nums1.length; i++){
+        const idx = nums2.indexOf(nums1[i])
+        const arr = nums2.slice(idx+1, nums2.length)
+        const flag = arr.find(v => v >= nums1[i])
+        flag ? result.push(flag) : result.push(-1)
+    }
+    return result
+};
