@@ -1,0 +1,36 @@
+// https://leetcode.com/problems/construct-the-rectangle
+/**
+ * @param {number} area
+ * @return {number[]}
+ */
+
+// 내 풀이
+/**
+ * @param {number} area
+ * @return {number[]}
+ */
+var constructRectangle = function(area) {
+    let minPair = {pair:[], diff:Infinity}
+    for(let i=1; i<=area; i++){
+        if(area % i === 0){
+            if(minPair.diff > Math.abs(i - area/i)){
+                minPair = {
+                    pair: [area/i, i],
+                    diff: Math.abs(i - area/i)
+                }
+            }
+        }
+    }
+    return minPair.pair
+};
+
+// 다른 풀이
+var constructRectangle = function(area) {
+    let width = Math.floor(Math.sqrt(area))
+    while(width > 0){
+        if(area % width == 0){
+            return [area / width, width]
+        }
+        width--
+    }
+};
