@@ -1,0 +1,35 @@
+// https://leetcode.com/problems/relative-ranks
+/**
+ * @param {number[]} score
+ * @return {string[]}
+ */
+var findRelativeRanks = function(score) {
+    return arr = score.map((v,i) => {
+        const obj = {
+            idx: i+1,
+            score: v
+        }
+        return obj
+    }).sort((a,b) => {
+        return b.score - a.score
+    }).map((v,i) => {
+        if(i === 0){
+            v.score = "Gold Medal"
+        }
+        else if(i === 1){
+            v.score = "Silver Medal"
+        }
+        else if(i === 2){
+            v.score = "Bronze Medal"
+        }
+        else{
+            v.score = (i+1).toString()
+        }
+        return v
+    })
+    .sort((a,b) => {
+        return a.idx - b.idx
+    }).map(v => {
+        return v.score
+    })
+};
