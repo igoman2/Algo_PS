@@ -1,0 +1,16 @@
+// https://leetcode.com/problems/detect-capital
+/**
+ * @param {string} word
+ * @return {boolean}
+ */
+var detectCapitalUse = function(word) {
+    if(word === word.toUpperCase())
+        return true
+    if(word === word.toLowerCase())
+        return true
+    for(let i=1; i<word.length; i++){
+        if(word[i] === word[i].toUpperCase())
+            return false
+    }
+    return true
+};
