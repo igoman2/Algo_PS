@@ -17,3 +17,4 @@ var arrayPairSum = function(nums) {
 
 
 // 함수형
+const arrayPairSum = nums => nums.sort((a,b) => a-b).reduce((acc,cur,i) => acc + (i % 2 ? 0 : cur))
