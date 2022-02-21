@@ -1,0 +1,36 @@
+https://leetcode.com/problems/reshape-the-matrix 
+/**
+ * @param {number[][]} mat
+ * @param {number} r
+ * @param {number} c
+ * @return {number[][]}
+ */
+ 
+// 내 풀이
+var matrixReshape = function(mat, r, c) {
+    const arr = mat.flat()
+    const result = []
+    if(arr.length !== r*c)
+        return mat
+    let temp = []
+    for(let i=0; i<arr.length; i++){
+        temp.push(arr[i])
+        if(temp.length == c){
+            result.push(temp)
+            temp = []                
+        }
+    }
+    return result
+};
+
+// 다른 풀이
+var matrixReshape = function(mat, r, c) {
+  var arr = mat.flat();
+  if (r * c != arr.length) return mat;
+
+  var res = [];
+  while (arr.length) {
+      res.push(arr.splice(0, c));
+  }
+  return res;
+};
