@@ -1,0 +1,27 @@
+// https://leetcode.com/problems/n-ary-tree-preorder-traversal
+/**
+ * // Definition for a Node.
+ * function Node(val, children) {
+ *    this.val = val;
+ *    this.children = children;
+ * };
+ */
+
+/**
+ * @param {Node|null} root
+ * @return {number[]}
+ */
+const preorder = function(root) {
+    const result = []
+    function traversal(p){
+        if(!p)
+            return;
+        result.push(p.val)
+        for(child of p.children){
+            traversal(child)
+        }
+    }
+    
+    traversal(root)
+    return result
+};
