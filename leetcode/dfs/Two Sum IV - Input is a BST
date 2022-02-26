@@ -1,0 +1,42 @@
+// https://leetcode.com/problems/two-sum-iv-input-is-a-bst
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} k
+ * @return {boolean}
+ */
+var findTarget = function(root, k) {
+    const list = []
+    function traversal(p){
+        if(!p)
+            return 0
+        traversal(p.left)
+        traversal(p.right)
+        list.push(p.val)
+    }
+    traversal(root)
+    
+    if(list.length < 2)
+        return false
+    
+    list.sort((a,b) => a-b)
+    let left = 0
+    let right = list.length - 1
+    while(left < right){
+        if( (list[left] + list[right]) == k)
+            return true
+        else if(list[left] + list[right] > k)
+            right--
+        else{
+            left++
+        }
+    }
+    return false
+};
