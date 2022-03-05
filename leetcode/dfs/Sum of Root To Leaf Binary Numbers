@@ -1,0 +1,32 @@
+// https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/submissions
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var sumRootToLeaf = function(root) {
+    const arr = []
+    dfs(root, [])
+    function dfs(p, load){
+        if(!p)
+            return
+        let tempLoad = [...load]
+        tempLoad.push(p.val)
+        if(!p.left && !p.right){
+            arr.push(tempLoad.join(''))
+        }
+        const left = dfs(p.left, tempLoad)
+        const right = dfs(p.right, tempLoad)
+    }
+    
+    return arr.reduce((acc, cur) => {
+        return acc + parseInt(cur, 2)
+    }, 0)
+};
