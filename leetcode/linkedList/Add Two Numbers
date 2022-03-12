@@ -1,0 +1,62 @@
+// https://leetcode.com/problems/add-two-numbers
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+ 
+ 
+// 배열 순회하면서 링크드리스트 생성하는 법 숙지할 것
+var addTwoNumbers = function(l1, l2) {
+    const sum = addList(l1, l2)
+    let head;
+    let curr;
+    sum.forEach((num) => {
+        if(!head){
+            head = new ListNode(+num, null)
+            curr = head
+        }
+        else if(!curr.next){
+            curr.next = new ListNode(+num, null)
+            curr = curr.next
+        }
+    })
+    return head
+};
+
+function addList(list1, list2){
+    let carry = 0
+    const array = []
+    while(list1 || list2){
+        let n1 = 0
+        let n2 = 0
+        if(list1){
+            n1 = list1.val
+            list1 = list1.next
+        }
+        if(list2){
+              n2 = list2.val
+            list2 = list2.next
+        }
+        let sum = n1 + n2 + carry
+        if(sum >= 10){
+            carry = 1
+            sum = sum % 10
+        }
+        else{
+            carry = 0
+        }
+        array.push(sum)
+    }
+    if(carry == 1)
+        array.push(1)
+    return array
+}
+
