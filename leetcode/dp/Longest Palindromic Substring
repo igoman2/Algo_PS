@@ -1,0 +1,34 @@
+// https://leetcode.com/problems/longest-palindromic-substring
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function (s) {
+    let maxSubString = ''
+    for(let i=0; i<s.length; i++){
+        for(let j=0; j<=i; j++){
+            if(i+1-j < maxSubString.length){
+                continue
+            }
+            let subString = s.substring(j, i+1)
+            if(isPalindrome(subString)){
+                if(subString.length > maxSubString.length){
+                    maxSubString = subString
+                }
+            }
+        }
+    }
+    return maxSubString
+}
+function isPalindrome(str){
+    let left = 0;
+    let right = str.length - 1
+    while(left < right){
+        if(str[left] !== str[right]){
+            return false
+        }
+        left++
+        right--
+    }
+    return true
+}
