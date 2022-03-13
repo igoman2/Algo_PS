@@ -1,0 +1,43 @@
+// https://leetcode.com/problems/3sum
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function(nums) {
+    const result = []
+    nums.sort((a,b) => {
+        return a-b
+    })
+    for(let i=0; i<nums.length; i++){
+        let x = nums[i]
+        let left = i+1
+        let right = nums.length-1
+        while(left < right){
+            let counter = x + nums[left] + nums[right]
+            let isDuplicated = false
+            if(counter > 0){
+                right--
+            }
+            else if(counter < 0){
+                left++
+            }
+            else{
+                for(let a=0; a<result.length; a++){
+                    if(result[a][0] === x && result[a][1] === nums[left] && result[a][2] === nums[right]){
+                        isDuplicated = true
+                    }
+                }
+                if(!isDuplicated){
+                    result.push([x, nums[left], nums[right]])
+                }
+                if(counter > 0){
+                    right--
+                }
+                else{
+                    left++
+                }
+            }
+        }
+    }
+    return result
+};
