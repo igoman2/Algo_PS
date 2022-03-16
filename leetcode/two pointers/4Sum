@@ -1,0 +1,82 @@
+// https://leetcode.com/problems/4sum/submissions
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[][]}
+ */
+
+// 내 풀이
+var fourSum = function(nums, target) {
+    nums.sort((a,b) => {
+        return a-b
+    })
+    
+    const result = []
+    for(let start=0; start<nums.length-3; start++){
+        for(let left=start+1; left<nums.length-2; left++){
+            let mid = left+1
+            let right = nums.length-1
+            while(mid < right){
+                const sum = nums[start] + nums[left] + nums[mid] + nums[right]
+                if(sum < target){
+                    mid++
+                }
+                else if(sum > target){
+                    right--
+                }
+                else{
+                    if(result.length == 0){
+                        result.push([nums[start], nums[left], nums[mid], nums[right]])
+                    }
+                    else{
+                        let isDuplicated = false
+                        for(let a=0; a<result.length; a++){
+                            if(result[a][0] == nums[start] && result[a][1] == nums[left] && result[a][2] == nums[mid] && result[a][3] == nums[right]){
+                                isDuplicated = true
+                            }
+                        }
+                        if(!isDuplicated){
+                            result.push([nums[start], nums[left], nums[mid], nums[right]])
+                        }
+                        mid++
+                    }
+                }
+            }
+        }
+    }
+    return result
+};
+
+
+// 다른 풀이
+// 중복 걸러내는 로직이 훨씬 깔끔함
+var fourSum = function(nums, target) {
+    nums.sort((a, b) => a - b);
+    const result = []
+    
+    for(let i = 0; i < nums.length - 3; i++) {
+        for(let j = i + 1; j < nums.length - 2; j++) {
+            let low = j + 1;
+            let high = nums.length - 1
+
+            while(low < high) {
+                const sum = nums[i] + nums[j] + nums[low] + nums[high];
+                if(sum === target) {
+                    result.push([nums[i], nums[j], nums[low], nums[high]])
+                    while(nums[low] === nums[low + 1]) low++;
+                    while(nums[high] === nums[high - 1]) high--;
+                    low++;
+                    high--;
+                } else if(sum < target) {
+                    low++
+                } else {
+                    high--
+                }
+            }   
+            while(nums[j] === nums[j + 1]) j++;
+        }   
+        while(nums[i] === nums[i + 1]) i++;
+    }
+    return result
+};
