@@ -1,0 +1,40 @@
+// https://leetcode.com/problems/jump-game
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+
+// 내 풀이
+// recursion & memoization
+var canJump = function(nums) {
+    const memoization = new Map()
+    function permute(idx){
+        if(memoization.has(idx))
+            return memoization.get(idx)
+        if(idx >= nums.length-1)
+            return true
+        if(nums[idx] == 0)
+            return false
+        for(let i=nums[idx]; i>0; i--){
+            if(permute(idx + i)){
+                memoization.set(idx, true)
+                return true
+            }
+        }
+        memoization.set(idx, false)
+        return false
+    }
+    return permute(0)
+};
+
+// 다른 풀이
+// greedy
+var canJump = function(nums) {
+    let max = nums[0];
+    for (let i=0;i<nums.length;i++) {
+        if (max < i) return false
+        max = Math.max(i+nums[i], max);
+        console.log(i, nums[i], max)
+    }
+    return true;
+};
