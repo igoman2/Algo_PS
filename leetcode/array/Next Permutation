@@ -1,0 +1,47 @@
+// https://leetcode.com/problems/next-permutation
+
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+ 
+// array, 2 pointers, greedy
+
+// Next Permutation Algorithm
+// https://jins-dev.tistory.com/80
+var nextPermutation = function(nums){
+    for(let i=nums.length-1; i>=0; i--){
+        if(nums[i] < nums[i+1]){
+            const large = nextLarge(i)
+            swap(i, large)
+            reverse(i+1)
+            return
+        }
+    }
+    
+    nums.reverse()
+    
+    function nextLarge(index){
+        for(let i=nums.length-1; i>index; i--){
+            if(nums[i] > nums[index])
+                return i
+        }
+    }
+    
+    function swap(i, j){
+        const temp = nums[j]
+        nums[j] = nums[i]
+        nums[i] = temp
+    }
+    
+    function reverse(index){
+        let left = index
+        let right = nums.length - 1 
+        
+        while(left < right){
+            swap(left, right)
+            left++
+            right--
+        }
+    }
+}
