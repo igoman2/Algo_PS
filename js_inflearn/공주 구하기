@@ -1,0 +1,17 @@
+      function solution(n, k) {
+        const queue = Array.from({ length: n }, (v, i) => i + 1);
+        let idx = 0;
+        let count = 1;
+        while (queue.length > 1) {
+          if (count === k) {
+            queue.shift();
+            count = 1;
+          } else {
+            queue.push(queue.shift());
+            count++;
+          }
+        }
+        return queue[0];
+      }
+
+      console.log(solution(8, 3));
