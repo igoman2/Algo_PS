@@ -1,0 +1,33 @@
+  function solution(str) {
+        const stack = [];
+        const answer = "";
+        for (let i = 0; i < str.length; i++) {
+          if (Number(str[i])) {
+            stack.push(Number(str[i]));
+          } else {
+            const num1 = stack.pop();
+            const num2 = stack.pop();
+            console.log(num1, num2);
+            switch (str[i]) {
+              case "+":
+                stack.push(num1 + num2);
+                break;
+              case "-":
+                stack.push(num2 - num1);
+                break;
+              case "*":
+                stack.push(num1 * num2);
+                break;
+
+              case "/":
+                stack.push(num2 / num1);
+                break;
+            }
+          }
+        }
+        console.log(stack);
+        return answer;
+      }
+
+      let str = "352+*9-";
+      console.log(solution(str));
