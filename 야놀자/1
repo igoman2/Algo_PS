@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // you can write to stdout for debugging purposes, e.g.
+      // console.log('this is a debug message');
+
+      function solution(N) {
+        let twiceNum = sumOfDigits(N) * 2;
+        let k = N + 1;
+        while (true) {
+          if (sumOfDigits(k) == twiceNum) {
+            return k;
+          }
+          k++;
+        }
+      }
+
+      function sumOfDigits(num) {
+        const str = num + "";
+        let val = 0;
+        for (let i = 0; i < str.length; i++) {
+          val = val + Number(str[i]);
+        }
+        return val;
+      }
+    </script>
+  </body>
+</html>
