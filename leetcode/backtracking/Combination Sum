@@ -1,0 +1,22 @@
+// https://leetcode.com/problems/combination-sum/submissions
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum = function(candidates, target) {
+    const answer = []
+    function dfs(tmp, t, last){
+        if(t == 0){
+            answer.push(tmp)
+            return;
+        }
+        for(let i=last; i<candidates.length; i++){
+            if(t - candidates[i] >= 0){
+                dfs([...tmp, candidates[i]], t - candidates[i], i)
+            }
+        }
+    }
+    dfs([], target, 0)
+    return answer
+};
