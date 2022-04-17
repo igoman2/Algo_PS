@@ -1,0 +1,16 @@
+// https://leetcode.com/problems/lexicographical-numbers/submissions
+
+// 백트래킹
+var lexicalOrder = function(n) {
+    const result = []
+    function backtrack(num){
+        if(num > n)
+            return;
+        result.push(num)
+        backtrack(num*10)
+        if(num%10 !== 9)
+            backtrack(num+1)
+    }
+    backtrack(1)
+    return result
+}
