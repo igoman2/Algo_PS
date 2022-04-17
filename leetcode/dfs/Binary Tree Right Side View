@@ -1,0 +1,58 @@
+// https://leetcode.com/problems/binary-tree-right-side-view
+
+// bfs 
+var rightSideView = function(root) {
+    if(!root)
+        return []
+    const answer = []
+    const queue = [root]
+    const map = new Map()
+    let level = 0
+    while(queue.length > 0) {
+        const LENGTH = queue.length
+        for(let i=0; i<LENGTH; i++){
+            const current = queue.shift()
+            if(map.has(level)){
+                map.get(level).push(current.val)
+            }
+            else{
+                map.set(level, [current.val])
+            }
+            if(current.left)
+                queue.push(current.left)
+            if(current.right)
+                queue.push(current.right)
+        }
+        level++
+    }
+    for(let [key, val] of map){
+        answer.push(val[val.length-1])
+    }  
+    return answer
+};
+
+// dfs 
+var rightSideView = function(root) {
+    const map = new Map()
+    const answer = []
+    function dfs(p, level){
+        if(!p){
+            return ;
+        }
+        
+        let currentLevel = level+1
+        if(map.has(currentLevel)){
+            map.get(currentLevel).push(p.val)
+        }
+        else{
+            map.set(currentLevel, [p.val])
+        }
+        dfs(p.left, currentLevel)
+        dfs(p.right, currentLevel)
+    }
+    dfs(root, 0)
+    for(let [key, val] of map){
+        answer.push(val[val.length-1])
+    }  
+    return answer
+};
