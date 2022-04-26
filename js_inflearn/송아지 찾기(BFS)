@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s, e) {
+        let answer = 0;
+        let ch = Array.from({ length: 10001 }, () => 0);
+        ch[s] = 1;
+        let queue = [s];
+        let L = 0;
+        while (queue.length) {
+          let n = queue.length;
+          for (let i = 0; i < n; i++) {
+            let cur = queue.shift();
+            for (let x of [cur + 1, cur - 1, cur + 5]) {
+              if (x === e) {
+                return L + 1;
+              }
+              if (ch[x] === 0 && x >= 0 && x <= 10000) {
+                ch[x] = 1;
+                queue.push(x);
+              }
+            }
+          }
+          L++;
+        }
+        return answer;
+      }
+
+      console.log(solution(5, 14));
+    </script>
+  </body>
+</html>
