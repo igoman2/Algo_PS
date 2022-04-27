@@ -1,0 +1,37 @@
+// 투포인터
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr1, arr2) {
+        let answer = [];
+        let l = 0;
+        let r = 0;
+        let n = arr1.length;
+        let m = arr2.length;
+        while (l < n && r < m) {
+          if (arr1[l] < arr2[r]) {
+            answer.push(arr1[l++]);
+          } else {
+            answer.push(arr2[r++]);
+          }
+        }
+        while (l < n) {
+          answer.push(arr1[l++]);
+        }
+        while (r < m) {
+          answer.push(arr2[r++]);
+        }
+        return answer;
+      }
+
+      let a = [1, 3, 4, 5];
+      let b = [1, 2];
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
