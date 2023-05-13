@@ -1,0 +1,117 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function(nums, target) {
+    let start = 0;
+    let end = nums.length - 1
+    let mid = getMiddle(start, end)
+
+    while(start <= end){
+        if(nums[start] === target){
+            return start
+        }
+        if(nums[end] === target){
+            return end
+        }
+        if(nums[mid] === target){
+            return mid
+        }
+
+        // m < t
+        else if(nums[mid] < target){
+            // m < e
+            if(nums[mid] < nums[end]){
+                // e < t
+                if(nums[end] < target){
+                    end = mid - 1
+                    mid = getMiddle(start, end)
+                }
+                // e > t
+                else{
+                    start  = mid + 1
+                    mid = getMiddle(start, end)
+                }
+            }
+            // m > e
+            else{
+                // e < t
+                if(nums[end] < target){
+                    start  = mid + 1
+                    mid = getMiddle(start, end)
+                }
+                // e > t
+                else{
+                    end = mid - 1
+                    mid = getMiddle(start, end)
+                }
+            }
+        }
+        // m > t
+        else{
+            // m > e
+            if(nums[mid] > nums[end]){
+                // e > t
+                if(nums[end] > target){
+                    start = mid + 1
+                    mid = getMiddle(start, end)
+                }
+                // e < t
+                else{
+                    end = mid - 1
+                    mid = getMiddle(start, end)
+                }
+            }
+            // m < e
+            else{
+                // e > t
+                if(nums[end] > target){
+                    end = mid - 1
+                    mid = getMiddle(start, end)
+                }
+                // e < t
+                else{
+                    start = mid + 1
+                    mid = getMiddle(start, end)
+                }
+            }
+        }
+    }
+
+    return -1
+};
+
+
+// 모범 답안
+var search = function(nums, target){
+    let start = 0;
+    let end = nums.length - 1
+
+    while(start <= end){
+        let mid = getMiddle(start, end)
+    
+        if(nums[mid] === target){
+            return mid
+        }
+        if(nums[start] < nums[mid]){
+            if(nums[start] <= target && target <= nums[mid]){
+                end = mid - 1
+            }
+            else{
+                start = mid + 1
+            }
+        }
+        
+        else{
+            if(nums[mid] <= target && target <= nums[end]){
+                start = mid + 1
+            }
+            else{
+                end = mid - 1
+            }
+        }
+    }
+
+    return -1
+}
