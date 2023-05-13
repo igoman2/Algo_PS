@@ -1,0 +1,22 @@
+// nums[mid] < nums[end] 면 무조건 end를 mid로
+// 루프를 돌면 무조건 left와 right가 동일한 인덱스를 가리키게 되는데 그 값이 최솟값
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findMin = function(nums) {
+    let start = 0
+    let end = nums.length - 1
+
+    while(start < end){
+        let mid = Math.floor((start + end) / 2)
+        if(nums[mid] > nums[end]){
+            start = mid + 1
+        }
+        else{
+            end = mid
+        }
+    }
+    return nums[start]
+};
