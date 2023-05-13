@@ -1,0 +1,39 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var searchRange = function(nums, target) {
+    let start = 0
+    let end = nums.length - 1
+    let mid = Math.floor((start + end)/2)
+
+    while(start <= end){
+        if(nums[mid] === target){
+            let a = mid
+            let b = mid
+            if(nums[mid-1] === target){
+                while(nums[a-1] === target){
+                    a--
+                }
+            }
+            if(nums[mid+1] === target){
+                while(nums[b+1] === target){
+                    b++
+                }
+            }
+
+            return [a, b]
+        }
+        else if(nums[mid] < target){
+            start = mid + 1
+            mid = Math.floor((start + end)/ 2)
+        }
+        else if(nums[mid] > target){
+            end = mid - 1
+            mid = Math.floor((start + end)/ 2)
+        }
+    }
+
+    return [-1, -1]
+};
