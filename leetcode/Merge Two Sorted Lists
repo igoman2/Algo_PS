@@ -6,27 +6,28 @@
  * }
  */
 /**
- * @param {ListNode} l1
- * @param {ListNode} l2
+ * @param {ListNode} list1
+ * @param {ListNode} list2
  * @return {ListNode}
  */
-var mergeTwoLists = function(l1, l2) {
-    var mergedHead = { val :-1, next : null }
-    let crt = mergedHead
-    while(l1 && l2) {
-        console.log(crt.val)
-        if(l1.val > l2.val) {
-            console.log(l2)
-            crt.next = l2;
-            l2 = l2.next;
-        } else {
-            console.log(l1)
-            crt.next = l1;
-            l1 = l1.next;
+const mergeTwoLists = (list1, list2) => {
+    let dummy = new ListNode(-Infinity)
+    let prev = dummy;
+    while (list1 && list2) {
+     if (list1.val <= list2.val){
+         prev.next = list1;
+         prev = list1;
+         list1 = list1.next;
+         
+     } else {
+         prev.next = list2;
+         prev = list2;
+         list2 = list2.next;
         }
-        crt = crt.next;
     }
-    crt.next = l1 || l2;
     
-    return mergedHead.next;
+    if (!list1) prev.next = list2;
+    if (!list2) prev.next = list1;
+    return dummy.next
+    
 };
