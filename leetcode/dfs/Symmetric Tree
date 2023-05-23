@@ -48,3 +48,26 @@ var isSymmetric = function(root) {
 
     return true
 };
+
+
+ // 다른 풀이
+var isSymmetric = function(root) {
+    let leftTree = root.left
+    let rightTree = root.right
+
+    function solve(p,q){
+        if(p == null && q == null){
+            return true
+        }
+        if(p == null || q == null){
+            return false
+        }
+        if(p.val != q.val){
+            return false
+        }
+        
+        return solve(p.left, q.right) && solve(p.right, q.left)
+    }
+    
+    return solve(root.left, root.right)
+};
