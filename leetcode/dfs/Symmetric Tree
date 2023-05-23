@@ -1,0 +1,50 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isSymmetric = function(root) {
+    const left = root.left
+    const right = root.right
+
+    const leftArray = []
+    const rightArray = []
+
+    function leftTraversal(node){
+        if(!node){
+            leftArray.push(-1)
+            return
+        }
+        leftArray.push(node.val)
+        leftTraversal(node.right)
+        leftTraversal(node.left)
+    }
+
+    function rightTraversal(node){
+        if(!node){
+            rightArray.push(-1)
+            return
+        }
+        rightArray.push(node.val)
+        rightTraversal(node.left)
+        rightTraversal(node.right)
+    }
+
+    leftTraversal(left)
+    rightTraversal(right)
+
+    for(i=0; i<leftArray.length; i++){
+        if(leftArray[i] !== rightArray[i]){
+            return false
+        }
+    }
+
+    return true
+};
