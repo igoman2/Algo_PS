@@ -52,8 +52,6 @@ var isSymmetric = function(root) {
 
  // 다른 풀이
 var isSymmetric = function(root) {
-    let leftTree = root.left
-    let rightTree = root.right
 
     function solve(p,q){
         if(p == null && q == null){
