@@ -1,0 +1,17 @@
+// you can write to stdout for debugging purposes, e.g.
+// console.log('this is a debug message');
+
+function solution(A) {
+    const set = new Set(A)
+    let maxNum = 0
+
+    for(let i=0; i<A.length; i++){
+        const num = A[i]
+
+        if(set.has(-num) && num > maxNum){
+            maxNum = num
+        }
+    }
+
+    return maxNum
+}
