@@ -1,0 +1,85 @@
+import React, { Fragment, useState, useEffect } from 'react';
+
+function Solution() {
+  const [inputMinutes, setInputMinutes] = useState(0)
+  const [inputSeconds, setInputSeconds] = useState(0)
+  const [displayMinutes, setDisplayMinutes] = useState(0)
+  const [displaySeconds, setDisplaySeconds] = useState(0)
+  const [minutes, setMinutes] = useState(0)
+  const [seconds, setSeconds] = useState(0)
+  const [isRunning, setIsRunning] = useState(false)
+  
+
+  useEffect(()=>{
+    let interval;
+
+    if(isRunning){
+      interval = setInterval(() => {
+        if(seconds > 0){
+          setSeconds(seconds - 1)
+        } else if(minutes > 0 ){
+          setMinutes(minutes - 1)
+          setSeconds(59)
+        } else{
+          setIsRunning(false)
+        }
+      }, 1000)
+    }
+
+    return () => clearInterval(interval)
+  },[seconds, minutes, isRunning])
+
+  const handleInputMinutes = (e) => {
+    setDisplayMinutes(Number(e.target.value))
+    setInputMinutes(Number(e.target.value))
+  }
+  
+  const handleInputSeconds = (e) => {
+    setDisplaySeconds(Number(e.target.value))
+    setInputSeconds(Number(e.target.value))
+  }
+
+  const handleStart = () => {
+    const total = inputMinutes * 60 + inputSeconds;
+    setMinutes(Math.floor(total / 60));
+    setSeconds(total % 60)
+    setIsRunning(true)
+  }
+
+  const handlePauseResume = () => {
+    setIsRunning((prev) => !prev)
+  }
+
+  const handleReset = () => {
+    setMinutes(0)
+    setSeconds(0)
+    setInputMinutes(0)
+    setInputSeconds(0)
+    setDisplayMinutes(0)
+    setDisplaySeconds(0)
+    setIsRunning(false)
+  }
+
+  const formatTime = (value) => String(value).padStart(2, '0')
+  
+  return (
+    <Fragment>
+      <label>
+        <input type="number" value={displayMinutes} onChange={handleInputMinutes}/>
+        Minutes
+      </label>
+      <label>
+        <input type="number" value={displaySeconds} onChange={handleInputSeconds}/>
+        Seconds
+      </label>
+
+      <button onClick={handleStart}>START</button>
+      <button onClick={handlePauseResume}>PAUSE / RESUME</button>
+      <button onClick={handleReset}>RESET</button>
+
+      <h1 data-testid="running-clock">{`${formatTime(minutes)}:${formatTime(seconds)}`}</h1>
+    </Fragment>
+  );
+}
+
+export default Solution;
