@@ -32,3 +32,63 @@ function isPalindrome(str){
     }
     return true
 }
+
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+    // O(n^3)
+    // let currentString = ''
+    // let result = ''
+    // for(let i=0; i<s.length; i++){
+    //     currentString = ''
+    //     for(let j=i; j<s.length; j++){
+    //         currentString += s[j]
+    //         if(checkPalindromic(currentString)){
+    //             if(currentString.length > result.length){
+    //                 result = currentString
+    //             }
+    //         }
+    //     }
+    // }
+
+    // return result
+
+    // O(n^2)
+    if (s.length === 0)
+        return "";
+    if (s.length === 1)
+        return s;
+
+    let left = 0
+    let right = left + 1
+    let currentString = s[left]
+    let result = ''
+    while(left < s.length){
+        if(currentString.length > result.length){  
+            if(checkPalindromic(currentString)){
+                result = currentString  
+            }
+        }
+        if(right === s.length){
+            right = left + 1
+            left++
+            currentString = ''
+        }
+        currentString += s[right++]
+    }
+
+    return result
+};
+
+const checkPalindromic = (value) => {
+    for(let i=0; i<value.length; i++){
+        if(value[i] !== value[value.length - 1 - i]){
+            return false
+        }
+    }
+
+    return true
+}
