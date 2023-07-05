@@ -1,0 +1,15 @@
+/**
+ * @param {number[]} candyType
+ * @return {number}
+ */
+var distributeCandies = function(candyType) {
+    const AVAILABLE_CANDY = candyType.length / 2
+    const set = new Set(candyType)
+    
+    if(set.size > AVAILABLE_CANDY){
+        return AVAILABLE_CANDY
+    }
+    else{
+        return set.size
+    }
+};
