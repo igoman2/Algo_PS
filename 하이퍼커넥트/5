@@ -1,0 +1,44 @@
+Given two objects ol and o2, determine if they are deeply equal
+For objects to be deeply equal:
+1. They must contain the same keys.
+2. The associated values must also be deeply equal.
+Objects will also be considered deeply equal if they pass the strict equality check (===).
+The input objects are guaranteed to be valid JSON, as they result from executing JSON.parse.
+Example 1:
+Input ol = {X'1, y :2}, 02 = {x'1,Y 2}
+Output: true
+Explanation: Both objects have the same keys and values.
+Example 2:
+Input: ol = ['Y :2, X'1], 02 = {x'1, Y:2}
+Output: true
+Explanation: The keys occur in different orders, but they still match along with their values.
+Example 3:
+Input: ol = {'X*null,'L*: [1,2,3]), 02 = [X'null,L°(7, 2*, 3*|)
+Output: false
+Explanation: The number array in ol is different from the string array in 02.
+Example 4:
+Input: ol = true, 02 = false
+Output: false
+Explanation: true and false are not strictly equal (true I== false).
+
+
+
+function areDeeplyEqual(o1: any, o2: any): boolean {
+  if (o1 === o2) return true;  // 원시 값 비교
+
+  if (typeof o1 !== 'object' || o1 === null || typeof o2 !== 'object' || o2 === null) {
+    return false;  // 한 쪽이 객체가 아닌 경우
+  }
+
+  let keys1: string[] = Object.keys(o1);
+  let keys2: string[] = Object.keys(o2);
+
+  if (keys1.length !== keys2.length) return false;  // 키의 수가 다른 경우
+
+  for (let key of keys1) {
+    if (!o2.hasOwnProperty(key)) return false;  // 키가 o2에 없는 경우
+    if (!areDeeplyEqual(o1[key], o2[key])) return false;  // 값의 깊은 비교
+  }
+
+  return true;
+}
