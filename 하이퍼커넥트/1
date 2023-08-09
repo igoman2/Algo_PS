@@ -1,0 +1,51 @@
+use typescript's generics to implement a simple memory-based repository class.
+This class must provide CRUD functionality.
+The repository class must fulfill the following requirements.
+Have a create(entity: T): T method to add an item to the repository.
+Have a read(id: ID): T | null method to search for an item in the repository based on the given id.
+Have an update(id: ID, entity: T): T | null method to update an item in the repository based on the given id.
+Have a delete(id: ID): boolean method to remove an item from the repository based on the given id.
+
+
+interface Entity<ID> {
+  id: ID;
+}
+
+class Repository<T extends Entity<ID>, ID> {
+  private store: Map<ID, T> = new Map();
+
+  create(entity: T): T {
+    this.store.set(entity.id, entity);
+    return entity;
+  }
+
+  read(id: ID): T | null {
+    return this.store.get(id) || null;
+  }
+
+  update(id: ID, entity: T): T | null {
+    if (this.store.has(id)) {
+      this.store.set(id, entity);
+      return entity;
+    }
+    return null;
+  }
+
+  delete(id: ID): boolean {
+    return this.store.delete(id);
+  }
+}
+
+// Example usage
+interface Person extends Entity<number> {
+  name: string;
+  age: number;
+}
+
+const repository = new Repository<Person, number>();
+const newEntity = repository.create({ id: 1, name: "John Doe", age: 30 });
+
+const foundEntity = repository.read(1);
+if (foundEntity) {
+  console.log(foundEntity.name); // Output: "John Doe"
+}
