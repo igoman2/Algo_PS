@@ -23,6 +23,7 @@ function readLine() {
 }
 
 
+
 /*
  * Complete the 'isPossible' function below.
  *
@@ -36,29 +37,35 @@ function readLine() {
 
 function isPossible(a, b, c, d) {
     while(c > 0 && d > 0){
-        if(c > 0){
-            c = c % d
-            if(c === 0 && d !== b){
-                return "NO"
+        if(c > d){
+            if(d === b){
+                // c에서 d를 빼서 a에 도달하는지 확인
+                while(c > a){
+                    c -= d
+                }
+                return c === a ? 'Yes' : 'No'
             }
-        }
-        else if(d > c){
-            d = d % c
-            if(d === 0 && c !== a){
-                return "NO"
+            else{
+                c -= d
             }
         }
         else{
-            return 'NO'
+            if(c === a){
+                // d에서 c를 배서 b에 도달하는지 확인
+                while(d > b){
+                    d -= c
+                }
+                return d === b ? 'Yes' : 'No'
+            }
+            else{
+                d -= c
+            }
         }
     }
     
-    if(c === a && d === b){
-        return "YES"
-    }
-    
-    return "NO"
+    return "No"
 }
+
 function main() {
     const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
