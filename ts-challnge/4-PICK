@@ -1,0 +1,8 @@
+https://github.com/type-challenges/type-challenges/blob/main/questions/00004-easy-pick/README.ko.md
+
+### 정답
+```typescript
+type MyPick<T, K extends keyof T> = {
+  [S in K]: T[S]
+}
+```
