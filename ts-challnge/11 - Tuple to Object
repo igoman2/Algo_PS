@@ -1,0 +1,7 @@
+https://github.com/type-challenges/type-challenges/blob/main/questions/00011-easy-tuple-to-object/README.ko.md
+
+```typescript
+type TupleToObject<T extends readonly string[]> = {
+  [K in T[number]]: K
+}
+```
