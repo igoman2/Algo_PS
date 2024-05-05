@@ -1,1 +1,5 @@
+https://github.com/type-challenges/type-challenges/blob/main/questions/00014-easy-first/README.ko.md
+
+```typescript
 type First<T extends any[]> = T extends [] ? never : T[0]
+```
