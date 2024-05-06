@@ -1,0 +1,5 @@
+https://github.com/type-challenges/type-challenges/blob/main/questions/00898-easy-includes/README.ko.md
+
+```typescript
+type Includes<T extends readonly any[], U> = T extends [infer First, ...infer Rest] ? Equal<First, U> extends true ? true : Includes<Rest, U> : false
+```
