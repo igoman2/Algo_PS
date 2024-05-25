@@ -3,3 +3,5 @@ https://www.typescriptlang.org/play/?#code/PQKgUABBCMAMEFoIBUCuAHANgUwgFwHsIBVAO
 ```typescript
 type TupleToUnion<T extends unknown[]> = T[number]
 ```
+
+제네릭T를 배열로 좁혀놓으면 number 프러퍼티를 사용할 수 있음
